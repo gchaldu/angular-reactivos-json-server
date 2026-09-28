@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Task } from '../../interfaces/Task';
 import { TaskService } from '../../service/task-service';
 
@@ -8,8 +8,17 @@ import { TaskService } from '../../service/task-service';
   templateUrl: './task-list.html',
   styleUrl: './task-list.css',
 })
-export class TaskList {
+export class TaskList implements OnInit{
+  
+  ngOnInit(): void {
+    this.taskService.listTasks().subscribe(
+      data => {
+        this.tasks = data
+        console.log(data);
+      }
+    )
+  }
 
   taskService = inject(TaskService)
-  tasks: Task[] = this.taskService.listTasks()
+  tasks: any = this.taskService.listTasks()
 }
