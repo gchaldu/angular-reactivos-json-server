@@ -1,0 +1,25 @@
+<form [formGroup]="formulario">
+    <div>
+        <label for="">Id:</label>
+        <input type="text" formControlName="id">
+        @if (this.formulario.controls['id'].hasError('required')) {
+            <div>
+                Dato requerido
+            </div>
+        }
+    </div>
+    <div>
+        <label for="">Tarea</label>
+        <input type="text" formControlName="task">
+        @if (this.formulario.controls['task'].hasError('required') && 
+            this.formulario.controls['task'].touched
+        ){
+            <div>
+                Dato requerido
+            </div>
+        }
+    </div>
+    <div>
+        <button (click)="add()" [disabled]="this.formulario.invalid">Crear Tarea</button>
+    </div>
+</form>
